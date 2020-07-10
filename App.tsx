@@ -1,12 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import OnBoarding from './src/Authentication/Onboarding';
-import { LoadAssets } from './src/components';
-
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Onboarding, Welcome } from "./src/Authentication";
+import { LoadAssets } from "./src/components";
 
 const AuthenticationStack = createStackNavigator();
 const fonts = {
@@ -16,26 +15,18 @@ const fonts = {
 };
 
 const AuthenticationNavigator = ({}) => {
-  return(
+  return (
     <AuthenticationStack.Navigator headerMode="none">
-      <AuthenticationStack.Screen name={"OnBoarding"} component={OnBoarding}/>
+      <AuthenticationStack.Screen name={"OnBoarding"} component={Onboarding} />
+      <AuthenticationStack.Screen name="Welcome" component={Welcome} />
     </AuthenticationStack.Navigator>
-  )
-}
-
-
-
-
-
-
+  );
+};
 
 export default function App() {
   return (
-    <LoadAssets {...{fonts}}>
-
-    
-      <AuthenticationNavigator/>
-      </LoadAssets>
+    <LoadAssets {...{ fonts }}>
+      <AuthenticationNavigator />
+    </LoadAssets>
   );
 }
-

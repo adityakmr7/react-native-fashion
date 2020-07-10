@@ -1,15 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Animated from "react-native-reanimated";
 import Button from "../../components/Button";
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "center",
 
     alignItems: "center",
     padding: 44,
+
+    flex: 1,
   },
   subtitle: {
     fontFamily: "SFProText-Semibold",
