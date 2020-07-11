@@ -1,15 +1,10 @@
 import React, { useRef } from "react";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import Slide, { SLIDE_HEIGHT, BORDER_RADIUS } from "./Slide";
-import {
-  useValue,
-  onScrollEvent,
-  interpolateColor,
-  useScrollHandler,
-} from "react-native-redash";
+import { interpolateColor, useScrollHandler } from "react-native-redash";
 import Animated, { multiply, divide } from "react-native-reanimated";
 import Subslide from "./Subslide";
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 import Dot from "./Dot";
 
 const styles = StyleSheet.create({
@@ -40,7 +35,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    //backgroundColor: "rgba(100,200,300,0.5)",
   },
 });
 
