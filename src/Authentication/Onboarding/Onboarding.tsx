@@ -12,6 +12,7 @@ import Subslide from "./Subslide";
 const { width } = Dimensions.get("window");
 import Dot from "./Dot";
 import { theme } from "../../components";
+import { StackNavigationProps, Routes } from "../../components/Navigation";
 
 const styles = StyleSheet.create({
   container: {
@@ -102,7 +103,11 @@ const slides = [
   },
 ];
 
-const OnBoarding = ({}) => {
+export const assets = slides.map((slide) => slide.picture.src);
+
+const OnBoarding = ({
+  navigation,
+}: StackNavigationProps<Routes, "OnBoarding">) => {
   const scroll = useRef<Animated.ScrollView>(null);
 
   const { scrollHandler, x } = useScrollHandler();
@@ -181,18 +186,20 @@ const OnBoarding = ({}) => {
             }}
           >
             {slides.map(({ subtitle, description }, i) => {
+              const last = i === slides.length - 1;
               return (
                 <Subslide
                   key={i}
                   onPress={() => {
-                    if (scroll.current) {
+                    if (last) {
+                      navigation.navigate("Welcome");
+                    } else {
                       scroll.current
-                        .getNode()
+                        ?.getNode()
                         .scrollTo({ x: width * (i + 1), animated: true });
                     }
                   }}
-                  last={i === slides.length - 1}
-                  {...{ subtitle, description }}
+                  {...{ subtitle, description, last }}
                 />
               );
             })}

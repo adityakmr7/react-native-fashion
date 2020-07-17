@@ -3,11 +3,17 @@ import React from "react";
 import "react-native-gesture-handler";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import { Onboarding, Welcome } from "./src/Authentication";
+import {
+  Onboarding,
+  Welcome,
+  assets as authenticationAssets,
+} from "./src/Authentication";
 import { LoadAssets, theme } from "./src/components";
 import { ThemeProvider } from "@shopify/restyle";
+import { Routes } from "./src/components/Navigation";
 
-const AuthenticationStack = createStackNavigator();
+const AuthenticationStack = createStackNavigator<Routes>();
+const assets = [...authenticationAssets];
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Display-Bold.otf"),
   "SFProDisplay-Semibold": require("./assets/fonts/SF-Pro-Display-Semibold.otf"),
@@ -27,7 +33,7 @@ const AuthenticationNavigator = ({}) => {
 
 export default function App() {
   return (
-    <ThemeProvider {...{ theme }}>
+    <ThemeProvider {...{ theme, assets }}>
       <LoadAssets {...{ fonts }}>
         <AuthenticationNavigator />
       </LoadAssets>
