@@ -1,11 +1,17 @@
 import React, { useRef } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import Slide, { SLIDE_HEIGHT, BORDER_RADIUS } from "./Slide";
+import { View, StyleSheet, Dimensions, Image } from "react-native";
+import Slide, { SLIDE_HEIGHT } from "./Slide";
 import { interpolateColor, useScrollHandler } from "react-native-redash";
-import Animated, { multiply, divide } from "react-native-reanimated";
+import Animated, {
+  multiply,
+  divide,
+  Extrapolate,
+  interpolate,
+} from "react-native-reanimated";
 import Subslide from "./Subslide";
 const { width } = Dimensions.get("window");
 import Dot from "./Dot";
+import { theme } from "../../components";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +21,7 @@ const styles = StyleSheet.create({
   slider: {
     height: SLIDE_HEIGHT,
 
-    borderBottomRightRadius: BORDER_RADIUS,
+    borderBottomRightRadius: theme.borderRadii.xl,
   },
 
   footer: {
@@ -26,15 +32,22 @@ const styles = StyleSheet.create({
     flex: 1,
 
     backgroundColor: "white",
-    borderTopLeftRadius: BORDER_RADIUS,
+    borderTopLeftRadius: theme.borderRadii.xl,
   },
   pagination: {
     ...StyleSheet.absoluteFillObject,
 
-    height: BORDER_RADIUS,
+    height: theme.borderRadii.xl,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: "center",
+    justifyContent: "flex-end",
+    borderBottomRightRadius: theme.borderRadii.xl,
+    overflow: "hidden",
   },
 });
 
@@ -45,15 +58,23 @@ const slides = [
     description:
       "Confused about your outfit? Don't worry! Find  the best outfit here!",
     color: "#BFEAF5",
-    picture: require("../../../assets/1.png"),
+    picture: {
+      src: require("../../../assets/1.png"),
+      width: 2513,
+      height: 4083,
+    },
   },
   {
     title: "Playful",
     subtitle: "Hear it first, Wear it first",
     description:
-      "Hating the cloth in yout wardrobe? Explore hundreds of outfit ideas!",
+      "Hating the cloth in your wardrobe? Explore hundreds of outfit ideas!",
     color: "#BEECC4",
-    picture: require("../../../assets/2.png"),
+    picture: {
+      src: require("../../../assets/2.png"),
+      width: 2791,
+      height: 4744,
+    },
   },
   {
     title: "Excentri",
@@ -61,7 +82,11 @@ const slides = [
     description:
       "Create your individual & unique style and look amazing everyday!",
     color: "#FFE4D9",
-    picture: require("../../../assets/3.png"),
+    picture: {
+      src: require("../../../assets/3.png"),
+      width: 2738,
+      height: 4544,
+    },
   },
   {
     title: "Funky",
@@ -69,7 +94,11 @@ const slides = [
     description:
       "Discover the latest trends in fashion and explore your personality!",
     color: "#FFDDDD",
-    picture: require("../../../assets/4.png"),
+    picture: {
+      src: require("../../../assets/4.png"),
+      width: 1757,
+      height: 3000,
+    },
   },
 ];
 
@@ -84,6 +113,32 @@ const OnBoarding = ({}) => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, { backgroundColor }]}>
+        {slides.map(({ picture }, index) => {
+          const opacity = interpolate(x, {
+            inputRange: [
+              (index - 0.7) * width,
+              index * width,
+              (index + 0.5) * width,
+            ],
+            outputRange: [0, 1, 0],
+            extrapolate: Extrapolate.CLAMP,
+          });
+          return (
+            <Animated.View key={index} style={[styles.underlay, { opacity }]}>
+              <Image
+                source={picture.src}
+                style={{
+                  ...StyleSheet.absoluteFillObject,
+                  width: width - theme.borderRadii.xl,
+                  height:
+                    ((width - theme.borderRadii.xl) * picture.height) /
+                    picture.width,
+                }}
+              />
+            </Animated.View>
+          );
+        })}
+
         <Animated.ScrollView
           ref={scroll}
           horizontal={true}
