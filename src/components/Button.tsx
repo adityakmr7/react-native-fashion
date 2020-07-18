@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { RectButton } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { useTheme } from "@shopify/restyle";
@@ -16,11 +16,12 @@ const styles = StyleSheet.create({
 
 interface ButtonProps {
   varient: "default" | "primary" | "transparent";
-  label: string;
+  label?: string;
   onPress: () => void;
+  children?: ReactNode;
 }
 
-const Button = ({ varient, label, onPress }: ButtonProps) => {
+const Button = ({ varient, label, onPress, children }: ButtonProps) => {
   const theme = useTheme<Theme>();
 
   const backgroundColor =
@@ -31,15 +32,19 @@ const Button = ({ varient, label, onPress }: ButtonProps) => {
       : theme.colors.grey;
 
   const color =
-    varient === "primary" ? theme.colors.white : theme.colors.button;
+    varient === "primary" ? theme.colors.white : theme.colors.secondary;
   return (
     <RectButton
       {...{ onPress }}
       style={[styles.container, { backgroundColor }]}
     >
-      <Text variant="button" style={{ color }}>
-        {label}
-      </Text>
+      {children ? (
+        children
+      ) : (
+        <Text variant="button" style={{ color }}>
+          {label}
+        </Text>
+      )}
     </RectButton>
   );
 };

@@ -2,8 +2,8 @@ import React from "react";
 import { Image, StyleSheet, Dimensions } from "react-native";
 import theme, { Box, Text } from "../../components/Theme";
 import { Button } from "../../components";
+import { StackNavigationProps, Routes } from "../../components/Navigation";
 
-interface WelcomeProps {}
 const { width } = Dimensions.get("window");
 const picture = {
   src: require("../../../assets/3.png"),
@@ -13,7 +13,7 @@ const picture = {
 
 export const assets = [picture.src];
 
-const Welcome = ({}: WelcomeProps) => {
+const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
   return (
     <Box flex={1} backgroundColor="white">
       <Box
@@ -56,7 +56,7 @@ const Welcome = ({}: WelcomeProps) => {
           </Text>
           <Button
             varient="primary"
-            onPress={() => {}}
+            onPress={() => navigation.navigate("Login")}
             label="Have an account ? Login"
           />
           <Button
