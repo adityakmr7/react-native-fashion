@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Image, Dimensions, StyleSheet, StatusBar } from "react-native";
-import theme, { Box } from "./Theme";
+import { Box, useTheme } from "./Theme";
 import {
   useSafeAreaInsets,
   SafeAreaView,
@@ -18,6 +18,7 @@ export const assets = [require("./assets/patterns/ptr.jpg")];
 
 const Container = ({ children, footer }: ContainerProps) => {
   const insets = useSafeAreaInsets();
+  const theme = useTheme();
   return (
     <ScrollView scrollEnabled={false} style={{ height: height / aspectRatio }}>
       <Box paddingBottom="xl" flex={1} backgroundColor="secondary">

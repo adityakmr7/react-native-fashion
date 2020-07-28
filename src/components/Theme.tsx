@@ -1,6 +1,13 @@
-import { createText, createBox } from "@shopify/restyle";
+import {
+  createText,
+  createBox,
+  useTheme as useReTheme,
+} from "@shopify/restyle";
+import { ViewStyle, TextStyle } from "react-native";
+import { Image } from "react-native-svg";
+type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | Image };
 
-const theme = {
+export const theme = {
   colors: {
     primary: "#2CB9B0",
     secondary: "#0C0D34",
@@ -61,5 +68,11 @@ export type Theme = typeof theme;
 
 export const Text = createText<Theme>();
 export const Box = createBox<Theme>();
+export const useTheme = () => useReTheme<Theme>();
 
-export default theme;
+export const makeStyles = <T extends NamedStyles<T>>(
+  styles: (theme: Theme) => T
+) => () => {
+  const currentTheme = useTheme();
+  return styles(currentTheme);
+};

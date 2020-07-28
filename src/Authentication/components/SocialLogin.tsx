@@ -2,9 +2,8 @@ import React, { ReactNode } from "react";
 import { View } from "react-native";
 
 import Svg, { Circle, Defs, Path, ClipPath, Use, G } from "react-native-svg";
-import theme, { Box } from "../../components/Theme";
+import { Box, useTheme } from "../../components/Theme";
 interface SocialLoginProps {}
-const SIZE = theme.borderRadii.l * 2;
 
 const Apple = () => {
   return (
@@ -104,6 +103,10 @@ interface SocialIconProps {
 }
 
 const SocialIcon = ({ children }: SocialIconProps) => {
+  const theme = useTheme();
+
+  const SIZE = theme.borderRadii.l * 2;
+
   return (
     <Box
       marginHorizontal="s"
