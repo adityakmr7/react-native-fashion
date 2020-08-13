@@ -6,7 +6,7 @@ import {
   SafeAreaView,
 } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 interface ContainerProps {
   children: ReactNode;
   footer: ReactNode;
@@ -57,7 +57,7 @@ const Container = ({ children, footer }: ContainerProps) => {
             backgroundColor="white"
             flex={1}
           >
-            {children}
+            <KeyboardAwareScrollView>{children}</KeyboardAwareScrollView>
           </Box>
         </Box>
         <Box paddingTop="xl" backgroundColor="secondary">

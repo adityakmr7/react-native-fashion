@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Container, Button, Text } from "../../components";
-import SocialLogin from "../components/SocialLogin";
 import { Box } from "../../components/Theme";
 import TextInput from "../components/Form/TextInput";
 import Checkbox from "../components/Form/Checkbox";
-import { Formik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
+import Footer from "../components/Footer";
 interface LoginProps {}
 
 const LoginSchema = Yup.object().shape({
@@ -18,24 +18,28 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = ({}: LoginProps) => {
-  const footer = (
-    <>
-      <SocialLogin />
-      <Box alignItems="center">
-        <Button onPress={() => alert("Signup")} variant="transparent">
-          <Box flexDirection="row" justifyContent="center">
-            <Text color="white" variant="button">
-              Don't have an account ?
-            </Text>
-            <Text marginLeft="s" color="primary" variant="button">
-              Sign Up here
-            </Text>
-          </Box>
-        </Button>
-      </Box>
-    </>
-  );
+  const {
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    values,
+    errors,
+    touched,
+    setFieldValue,
+  } = useFormik({
+    validationSchema: { LoginSchema },
+    initialValues: { email: "", password: "", remember: false },
+    onSubmit: (values) => console.log(values),
+  });
 
+  const password = useRef<typeof TextInput>(null);
+  const footer = (
+    <Footer
+      onPress={() => {}}
+      title="Don't have an account?"
+      action="Sign Up Here"
+    />
+  );
   return (
     <Container {...{ footer }}>
       <Box padding="l">
@@ -46,63 +50,60 @@ const Login = ({}: LoginProps) => {
           Use your credentials below and login to your account.
         </Text>
 
-        <Formik
-          validationSchema={LoginSchema}
-          initialValues={{ email: "", password: "", remember: false }}
-          onSubmit={(values) => console.log(values)}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-            setFieldValue,
-          }) => (
-            <Box>
-              <Box marginBottom="m">
-                <TextInput
-                  icon="mail"
-                  placeholder="Enter Your Email"
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  error={errors.email}
-                  touched={touched.email}
-                />
-              </Box>
+        <Box>
+          <Box marginBottom="m">
+            <TextInput
+              icon="mail"
+              placeholder="Enter Your Email"
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              error={errors.email}
+              touched={touched.email}
+              autoCompleteType="email"
+              autoCapitalize="none"
+              returnKeyLabel="next"
+              returnKeyType="next"
+              onSubmitEditing={() => password.current?.focus()}
+            />
+          </Box>
 
-              <TextInput
-                icon="lock"
-                placeholder="Enter Password"
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                error={errors.password}
-                touched={touched.password}
+          <TextInput
+            ref={password}
+            icon="lock"
+            placeholder="Enter Password"
+            onChangeText={handleChange("password")}
+            onBlur={handleBlur("password")}
+            error={errors.password}
+            touched={touched.password}
+            autoCompleteType="password"
+            secureTextEntry
+            autoCapitalize="none"
+            returnKeyLabel="go"
+            returnKeyType="go"
+            onSubmitEditing={() => handleSubmit()}
+            secureTextEntry
+          />
+
+          <Box flexDirection="row" justifyContent="space-between">
+            <Box marginTop="s">
+              <Checkbox
+                checked={values.remember}
+                onChange={() => setFieldValue("remember", !values.remember)}
+                label="Remember me"
               />
-
-              <Box flexDirection="row" justifyContent="space-between">
-                <Box marginTop="s">
-                  <Checkbox
-                    checked={values.remember}
-                    onChange={() => setFieldValue("remember", !values.remember)}
-                    label="Remember me"
-                  />
-                </Box>
-                <Button onPress={() => true} varient="transparent">
-                  <Text color="primary">Forgot password</Text>
-                </Button>
-              </Box>
-              <Box marginTop="m" alignItems="center">
-                <Button
-                  varient="primary"
-                  onPress={handleSubmit}
-                  label="Login into your account"
-                />
-              </Box>
             </Box>
-          )}
-        </Formik>
+            <Button onPress={() => true} varient="transparent">
+              <Text color="primary">Forgot password</Text>
+            </Button>
+          </Box>
+          <Box marginTop="m" alignItems="center">
+            <Button
+              varient="primary"
+              onPress={handleSubmit}
+              label="Login into your account"
+            />
+          </Box>
+        </Box>
       </Box>
     </Container>
   );
