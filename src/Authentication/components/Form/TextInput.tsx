@@ -1,11 +1,11 @@
-import React, { forwardRef, RefObject } from "react";
+import { Feather as Icon } from "@expo/vector-icons";
+import React, { forwardRef } from "react";
 import {
-  TextInput as RNTextInput,
   StyleSheet,
+  TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
 } from "react-native";
 import { Box, useTheme } from "../../../components/Theme";
-import { Feather as Icon } from "@expo/vector-icons";
 
 interface TextInputProps extends RNTextInputProps {
   placeholder: string;
@@ -14,7 +14,7 @@ interface TextInputProps extends RNTextInputProps {
   error?: string;
 }
 
-const TextInput = forwardRef(
+const TextInput = forwardRef<RNTextInput, TextInputProps>(
   ({ icon, touched, error, ...props }: TextInputProps, ref) => {
     const theme = useTheme();
     const SIZE = theme.borderRadii.m * 2;

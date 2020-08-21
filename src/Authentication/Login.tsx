@@ -1,14 +1,15 @@
-import React, { useRef } from "react";
-import { Container, Button, Text } from "../../components";
-import { Box } from "../../components/Theme";
-import TextInput from "../components/Form/TextInput";
-import Checkbox from "../components/Form/Checkbox";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { useFormik } from "formik";
+import React, { useRef } from "react";
+import { TextInput as RNTextInput } from "react-native";
 import * as Yup from "yup";
-import Footer from "../components/Footer";
-interface LoginProps {}
-
-const LoginSchema = Yup.object().shape({
+import { Button, Container, Text } from "../components";
+import { Routes } from "../components/Navigation";
+import { Box } from "../components/Theme";
+import Footer from "./components/Footer";
+import Checkbox from "./components/Form/Checkbox";
+import TextInput from "./components/Form/TextInput";
+const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
@@ -17,7 +18,7 @@ const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
-const Login = ({}: LoginProps) => {
+const Login = ({ navigation }: StackNavigationProp<Routes, "Login">) => {
   const {
     handleChange,
     handleBlur,
@@ -27,15 +28,17 @@ const Login = ({}: LoginProps) => {
     touched,
     setFieldValue,
   } = useFormik({
-    validationSchema: { LoginSchema },
+    validationSchema,
     initialValues: { email: "", password: "", remember: false },
     onSubmit: (values) => console.log(values),
   });
 
-  const password = useRef<typeof TextInput>(null);
+  const password = useRef<RNTextInput>(null);
   const footer = (
     <Footer
-      onPress={() => {}}
+      onPress={() => {
+        navigation.navigate("SignUp");
+      }}
       title="Don't have an account?"
       action="Sign Up Here"
     />
