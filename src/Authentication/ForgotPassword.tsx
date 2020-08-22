@@ -33,7 +33,10 @@ const ForgotPassword = ({
   } = useFormik({
     validationSchema,
     initialValues: { email: "", remember: false },
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      console.log(values);
+      navigation.navigate("PasswordChanged");
+    },
   });
   const footer = (
     <Footer
@@ -45,7 +48,7 @@ const ForgotPassword = ({
     />
   );
   return (
-    <Container {...{ footer }}>
+    <Container pattern={2} {...{ footer }}>
       <Box padding="l">
         <Text marginBottom="l" textAlign="center" variant="title1">
           Forgot Password ?

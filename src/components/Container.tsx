@@ -1,24 +1,27 @@
 import React, { ReactNode } from "react";
-import { Image, Dimensions, StyleSheet, StatusBar } from "react-native";
-import { Box, useTheme } from "./Theme";
-import {
-  useSafeAreaInsets,
-  SafeAreaView,
-} from "react-native-safe-area-context";
+import { Dimensions, Image, StatusBar, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Box, useTheme } from "./Theme";
 interface ContainerProps {
   children: ReactNode;
   footer: ReactNode;
+  pattern: 0 | 1 | 2;
 }
 const aspectRatio = 750 / 1125;
 const { width } = Dimensions.get("window");
 const height = width * aspectRatio;
-export const assets = [require("./assets/patterns/ptr.jpg")];
+export const assets = [
+  require("./assets/patterns/ptr.jpg"),
+  require("./assets/patterns/ptr.jpg"),
+  require("./assets/patterns/ptr.jpg"),
+];
 
-const Container = ({ children, footer }: ContainerProps) => {
+const Container = ({ children, footer, pattern }: ContainerProps) => {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const asset = assets[pattern];
   return (
     <ScrollView scrollEnabled={false} style={{ height: height / aspectRatio }}>
       <Box paddingBottom="xl" flex={1} backgroundColor="secondary">
@@ -30,7 +33,7 @@ const Container = ({ children, footer }: ContainerProps) => {
             height={height * 0.61}
           >
             <Image
-              source={assets[0]}
+              source={asset}
               style={{
                 width,
                 height,
@@ -42,7 +45,7 @@ const Container = ({ children, footer }: ContainerProps) => {
 
         <Box marginBottom="xl" flex={1} overflow="hidden">
           <Image
-            source={assets[0]}
+            source={asset}
             style={{
               ...StyleSheet.absoluteFillObject,
               width,

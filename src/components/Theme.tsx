@@ -1,9 +1,9 @@
 import {
-  createText,
   createBox,
+  createText,
   useTheme as useReTheme,
 } from "@shopify/restyle";
-import { ViewStyle, TextStyle } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 import { Image } from "react-native-svg";
 type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | Image };
 
@@ -17,6 +17,7 @@ export const theme = {
     grey: "rgba(12,13,52,0.05)",
     darkGrey: "#8A8D90",
     danger: "#FF0058",
+    primaryLight: "#E7F9F7",
   },
   spacing: {
     s: 8,
