@@ -1,26 +1,15 @@
 import { Feather as Icon } from "@expo/vector-icons";
-import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Button, Container, Text } from "../components";
-import { Routes } from "../components/Navigation";
+import { StackNavigationProps } from "../components/Navigation";
 import { Box } from "../components/Theme";
 import ClosedButton from "./components/CloseButton";
-import Footer from "./components/Footer";
 
 interface PasswordChangedProps {}
 const SIZE = 80;
 const PasswordChanged = ({
   navigation,
-}: StackNavigationProp<Routes, "PasswordChanged">) => {
-  const footer = (
-    <Footer
-      onPress={() => {
-        navigation.navigate("SignUp");
-      }}
-      title="Don't have an account?"
-      action="Sign Up Here"
-    />
-  );
+}: StackNavigationProps<"PasswordChanged">) => {
   return (
     <Container
       pattern={0}
@@ -30,10 +19,18 @@ const PasswordChanged = ({
         </Box>
       }
     >
-      <Box flex={1} justifyContent="center">
+      <Box
+        flex={1}
+        alignItems="center"
+        flexDirection="column"
+        justifyContent="center"
+        paddingVertical="l"
+      >
+        <Box height={60} />
         <Box
           backgroundColor="primaryLight"
-          opacity="0.5"
+          opacity={0.5}
+          justifyContent="center"
           style={{ height: SIZE, width: SIZE, borderRadius: SIZE / 2 }}
         >
           <Text color="primary" textAlign="center" fontSize={32}>
@@ -42,7 +39,7 @@ const PasswordChanged = ({
         </Box>
         <Box padding="l">
           <Text marginBottom="l" textAlign="center" variant="title1">
-            Welcome back
+            Password Changed
           </Text>
           <Text marginBottom="l" textAlign="center" variant="body">
             Use your credentials below and login to your account.

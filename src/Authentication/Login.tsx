@@ -1,10 +1,9 @@
-import { StackNavigationProp } from "@react-navigation/stack";
 import { useFormik } from "formik";
 import React, { useRef } from "react";
 import { TextInput as RNTextInput } from "react-native";
 import * as Yup from "yup";
 import { Button, Container, Text } from "../components";
-import { Routes } from "../components/Navigation";
+import { StackNavigationProps } from "../components/Navigation";
 import { Box } from "../components/Theme";
 import Footer from "./components/Footer";
 import Checkbox from "./components/Form/Checkbox";
@@ -18,7 +17,7 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
-const Login = ({ navigation }: StackNavigationProp<Routes, "Login">) => {
+const Login = ({ navigation }: StackNavigationProps<"Login">) => {
   const {
     handleChange,
     handleBlur,
@@ -30,7 +29,10 @@ const Login = ({ navigation }: StackNavigationProp<Routes, "Login">) => {
   } = useFormik({
     validationSchema,
     initialValues: { email: "", password: "", remember: false },
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      console.log(values);
+      navigation.navigate("PasswordChanged");
+    },
   });
 
   const password = useRef<RNTextInput>(null);

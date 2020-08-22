@@ -1,10 +1,9 @@
-import { StackNavigationProp } from "@react-navigation/stack";
 import { useFormik } from "formik";
 import React from "react";
 import { Linking } from "react-native";
 import * as Yup from "yup";
 import { Button, Container, Text } from "../components";
-import { Routes } from "../components/Navigation";
+import { StackNavigationProps } from "../components/Navigation";
 import { Box } from "../components/Theme";
 import Footer from "./components/Footer";
 import Checkbox from "./components/Form/Checkbox";
@@ -21,7 +20,7 @@ const validationSchema = Yup.object().shape({
 
 const ForgotPassword = ({
   navigation,
-}: StackNavigationProp<Routes, "ForgotPassword">) => {
+}: StackNavigationProps<"ForgotPassword">) => {
   const {
     handleChange,
     handleBlur,
@@ -34,7 +33,6 @@ const ForgotPassword = ({
     validationSchema,
     initialValues: { email: "", remember: false },
     onSubmit: (values) => {
-      console.log(values);
       navigation.navigate("PasswordChanged");
     },
   });
@@ -82,15 +80,15 @@ const ForgotPassword = ({
                 label="Remember me"
               />
             </Box>
-            <Button onPress={() => true} varient="transparent">
+            {/* <Button onPress={() => true} varient="transparent">
               <Text color="primary">Forgot password</Text>
-            </Button>
+            </Button> */}
           </Box>
           <Box marginTop="m" alignItems="center">
             <Button
               varient="primary"
               onPress={handleSubmit}
-              label="Rest Password"
+              label="Reset Password"
             />
           </Box>
         </Box>
