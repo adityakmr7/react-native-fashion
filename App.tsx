@@ -19,12 +19,12 @@ const fonts = {
   "SFProDisplay-Medium": require("./assets/fonts/SF-Pro-Display-Medium.otf"),
 };
 
-type AppStackRoutes = {
+type AppRoutes = {
   Authentication: undefined;
   Home: undefined;
 };
 
-const AppStack = createStackNavigator<AppStackRoutes>();
+const AppStack = createStackNavigator<AppRoutes>();
 export default function App() {
   return (
     <ThemeProvider {...{ theme, assets }}>

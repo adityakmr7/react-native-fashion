@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react";
-import { View } from "react-native";
-
-import Svg, { Circle, Defs, Path, ClipPath, Use, G } from "react-native-svg";
+import Svg, { Circle, ClipPath, Defs, G, Path, Use } from "react-native-svg";
 import { Box, useTheme } from "../../components/Theme";
+
 interface SocialLoginProps {}
 
 const Apple = () => {

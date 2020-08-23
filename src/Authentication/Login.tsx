@@ -1,10 +1,13 @@
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { CompositeNavigationProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { useFormik } from "formik";
 import React, { useRef } from "react";
 import { TextInput as RNTextInput } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import * as Yup from "yup";
 import { Button, Container, Text } from "../components";
-import { StackNavigationProps } from "../components/Navigation";
+import { AuthenticationRoutes, HomeRoutes } from "../components/Navigation";
 import { Box } from "../components/Theme";
 import Footer from "./components/Footer";
 import Checkbox from "./components/Form/Checkbox";
@@ -18,7 +21,14 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
-const Login = ({ navigation }: StackNavigationProps<"Login">) => {
+interface LoginProps {
+  navigation: CompositeNavigationProp<
+    StackNavigationProp<AuthenticationRoutes, "Login">,
+    DrawerNavigationProp<HomeRoutes, "OutfitIdeas">
+  >;
+}
+
+const Login = ({ navigation }: LoginProps) => {
   const {
     handleChange,
     handleBlur,
@@ -32,7 +42,7 @@ const Login = ({ navigation }: StackNavigationProps<"Login">) => {
     initialValues: { email: "", password: "", remember: false },
     onSubmit: (values) => {
       console.log(values);
-      navigation.navigate("Home");
+      navigation.navigate("OutfitIdeas");
     },
   });
 

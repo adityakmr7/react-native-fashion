@@ -3,19 +3,21 @@ import React from "react";
 import { Linking } from "react-native";
 import * as Yup from "yup";
 import { Button, Container, Text } from "../components";
-import { StackNavigationProps } from "../components/Navigation";
+import {
+  AuthenticationRoutes,
+  StackNavigationProps,
+} from "../components/Navigation";
 import { Box } from "../components/Theme";
 import Footer from "./components/Footer";
 import Checkbox from "./components/Form/Checkbox";
 import TextInput from "./components/Form/TextInput";
-interface ForgotPasswordProps {}
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
 const ForgotPassword = ({
   navigation,
-}: StackNavigationProps<"ForgotPassword">) => {
+}: StackNavigationProps<AuthenticationRoutes, "ForgotPassword">) => {
   const {
     handleChange,
     handleBlur,

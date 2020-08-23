@@ -6,14 +6,16 @@ import {
   RoundedIconButton,
   Text,
 } from "../components";
-import { StackNavigationProps } from "../components/Navigation";
+import {
+  AuthenticationRoutes,
+  StackNavigationProps,
+} from "../components/Navigation";
 import { Box } from "../components/Theme";
 
-interface PasswordChangedProps {}
 const SIZE = 80;
 const PasswordChanged = ({
   navigation,
-}: StackNavigationProps<"PasswordChanged">) => {
+}: StackNavigationProps<AuthenticationRoutes, "PasswordChanged">) => {
   return (
     <Container
       pattern={0}
