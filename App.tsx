@@ -1,4 +1,4 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "@shopify/restyle";
 import React from "react";
 import "react-native-gesture-handler";
@@ -9,6 +9,7 @@ import {
 } from "./src/Authentication";
 import { LoadAssets } from "./src/components";
 import { theme } from "./src/components/Theme";
+import { HomeNavigator } from "./src/Home";
 
 const assets = [...authenticationAssets];
 const fonts = {
@@ -17,14 +18,26 @@ const fonts = {
   "SFProDisplay-Regular": require("./assets/fonts/SF-Pro-Display-Regular.otf"),
   "SFProDisplay-Medium": require("./assets/fonts/SF-Pro-Display-Medium.otf"),
 };
-const Drawer = createDrawerNavigator();
 
+type AppStackRoutes = {
+  Authentication: undefined;
+  Home: undefined;
+};
+
+const AppStack = createStackNavigator<AppStackRoutes>();
 export default function App() {
   return (
     <ThemeProvider {...{ theme, assets }}>
       <LoadAssets {...{ fonts }}>
         <SafeAreaProvider>
-          <AuthenticationNavigator />
+          <AppStack.Navigator headerMode="none">
+            <AppStack.Screen
+              name="Authentication"
+              component={AuthenticationNavigator}
+            />
+
+            <AppStack.Screen name="Home" component={HomeNavigator} />
+          </AppStack.Navigator>
         </SafeAreaProvider>
       </LoadAssets>
     </ThemeProvider>

@@ -32,7 +32,7 @@ const Login = ({ navigation }: StackNavigationProps<"Login">) => {
     initialValues: { email: "", password: "", remember: false },
     onSubmit: (values) => {
       console.log(values);
-      navigation.navigate("PasswordChanged");
+      navigation.navigate("Home");
     },
   });
 
