@@ -1,9 +1,13 @@
-import { Feather as Icon } from "@expo/vector-icons";
 import React from "react";
-import { Button, Container, Text } from "../components";
+import {
+  Button,
+  Container,
+  RoundedIcon,
+  RoundedIconButton,
+  Text,
+} from "../components";
 import { StackNavigationProps } from "../components/Navigation";
 import { Box } from "../components/Theme";
-import ClosedButton from "./components/CloseButton";
 
 interface PasswordChangedProps {}
 const SIZE = 80;
@@ -14,8 +18,14 @@ const PasswordChanged = ({
     <Container
       pattern={0}
       footer={
-        <Box justifyContent="center" alignItems="center">
-          <ClosedButton onPress={() => navigation.pop()} />
+        <Box flexDirection="row" justifyContent="center">
+          <RoundedIconButton
+            backgroundColor="white"
+            color="secondary"
+            onPress={() => navigation.pop()}
+            name="x"
+            size={60}
+          />
         </Box>
       }
     >
@@ -27,16 +37,13 @@ const PasswordChanged = ({
         paddingVertical="l"
       >
         <Box height={60} />
-        <Box
+        <RoundedIcon
+          color="primary"
+          name="check"
+          size={SIZE}
           backgroundColor="primaryLight"
-          opacity={0.5}
-          justifyContent="center"
-          style={{ height: SIZE, width: SIZE, borderRadius: SIZE / 2 }}
-        >
-          <Text color="primary" textAlign="center" fontSize={32}>
-            <Icon name="check" size={32} />
-          </Text>
-        </Box>
+        />
+
         <Box padding="l">
           <Text marginBottom="l" textAlign="center" variant="title1">
             Password Changed

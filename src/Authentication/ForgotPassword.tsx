@@ -10,11 +10,6 @@ import Checkbox from "./components/Form/Checkbox";
 import TextInput from "./components/Form/TextInput";
 interface ForgotPasswordProps {}
 const validationSchema = Yup.object().shape({
-  password: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
@@ -54,7 +49,7 @@ const ForgotPassword = ({
         <Text marginBottom="l" textAlign="center" variant="body">
           Use your credentials below and login to your account.
         </Text>
-        <Box height={70} />
+        <Box height={90} />
         <Box>
           <Box marginBottom="m">
             <TextInput
