@@ -1,14 +1,13 @@
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { ThemeProvider } from "@shopify/restyle";
 import React from "react";
-
 import "react-native-gesture-handler";
-
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   assets as authenticationAssets,
   AuthenticationNavigator,
 } from "./src/Authentication";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { LoadAssets } from "./src/components";
-import { ThemeProvider } from "@shopify/restyle";
 import { theme } from "./src/components/Theme";
 
 const assets = [...authenticationAssets];
@@ -18,6 +17,7 @@ const fonts = {
   "SFProDisplay-Regular": require("./assets/fonts/SF-Pro-Display-Regular.otf"),
   "SFProDisplay-Medium": require("./assets/fonts/SF-Pro-Display-Medium.otf"),
 };
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
