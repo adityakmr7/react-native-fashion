@@ -1,6 +1,6 @@
 import React from "react";
-import { Dimensions, Image, StyleSheet } from "react-native";
-import { RoundedIconButton } from "../../components";
+import { Dimensions, Image } from "react-native";
+import { Header } from "../../components";
 import { Box, Text, theme } from "../../components/Theme";
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
 
@@ -8,7 +8,7 @@ const aspectRatio = 750 / 1125;
 const { width: wWidth } = Dimensions.get("window");
 const height = wWidth * aspectRatio;
 export const DRAWER_WIDTH = wWidth * 0.8;
-
+export const assets = [require("../../components/assets/patterns/ptr.jpg")];
 const items: DrawerItemProps[] = [
   {
     icon: "zap",
@@ -60,32 +60,20 @@ const Drawer = () => {
           bottom={0}
           borderBottomRightRadius="xl"
           backgroundColor="secondary"
-          flexDirection="row"
-          justifyContent="space-between"
-          padding="xl"
+          //flexDirection="row"
+          //justifyContent="space-between"
+          //padding="xl"
         >
-          <RoundedIconButton
-            name="x"
-            color="white"
-            backgroundColor="secondary"
-            onPress={() => {}}
-            size={24}
-            iconRatio={1}
-          />
-          <Text color="white">MY PROFILE</Text>
-          <RoundedIconButton
-            name="shopping-bag"
-            color="white"
-            backgroundColor="secondary"
-            onPress={() => {}}
-            size={24}
-            iconRatio={1}
+          <Header
+            title="Menu"
+            left={{ icon: "x", onPress: () => true }}
+            right={{ icon: "shopping-bag", onPress: () => true }}
           />
         </Box>
       </Box>
+
       <Box flex={0.8}>
         <Box flex={1} backgroundColor="secondary" />
-        <Box flex={1} backgroundColor="primary" />
         <Box
           position="absolute"
           top={0}
@@ -100,7 +88,7 @@ const Drawer = () => {
         >
           <Box
             alignSelf="center"
-            top={-theme.borderRadii.m}
+            top={-theme.borderRadii.xl + 30}
             style={{ borderRadius: 50 }}
             backgroundColor="pink"
             width={100}
@@ -123,20 +111,18 @@ const Drawer = () => {
 
       <Box
         width={DRAWER_WIDTH}
-        height={height * 0.61}
+        height={height * 0.3}
         overflow="hidden"
-        flex={0.2}
+        // flex={0.2}
         backgroundColor="white"
       >
         <Image
-          source={require("../../components/assets/patterns/ptr.jpg")}
+          source={assets[0]}
           style={{
-            ...StyleSheet.absoluteFillObject,
             width: DRAWER_WIDTH,
-            left: 0,
-            right: 0,
-            top: -height * (1 - 0.6),
-            height,
+            position: "absolute",
+            bottom: 0,
+            height: height / 3,
             borderTopLeftRadius: theme.borderRadii.xl,
           }}
         />

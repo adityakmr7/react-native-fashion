@@ -1,1 +1,1 @@
-export { default, DRAWER_WIDTH } from "./Drawer";
+export { assets, default, DRAWER_WIDTH } from "./Drawer";

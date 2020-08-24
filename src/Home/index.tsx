@@ -5,6 +5,7 @@ import DrawerContent, { DRAWER_WIDTH } from "./Drawer";
 import OutfitIdeas from "./OutfitIdeas";
 const Drawer = createDrawerNavigator<HomeRoutes>();
 
+export { assets } from "./Drawer";
 export const HomeNavigator = () => (
   <Drawer.Navigator
     drawerContent={DrawerContent}
