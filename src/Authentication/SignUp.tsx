@@ -2,10 +2,7 @@ import { useFormik } from "formik";
 import React, { useRef } from "react";
 import * as Yup from "yup";
 import { Button, Container, Text } from "../components";
-import {
-  AuthenticationRoutes,
-  StackNavigationProps,
-} from "../components/Navigation";
+import { AuthNavigationProps } from "../components/Navigation";
 import { Box } from "../components/Theme";
 import Footer from "./components/Footer";
 import TextInput from "./components/Form/TextInput";
@@ -22,9 +19,7 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
-const SignUp = ({
-  navigation,
-}: StackNavigationProps<AuthenticationRoutes, "SignUp">) => {
+const SignUp = ({ navigation }: AuthNavigationProps<"SignUp">) => {
   const {
     handleChange,
     handleBlur,

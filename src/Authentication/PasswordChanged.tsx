@@ -6,22 +6,20 @@ import {
   RoundedIconButton,
   Text,
 } from "../components";
-import {
-  AuthenticationRoutes,
-  StackNavigationProps,
-} from "../components/Navigation";
+import { AuthNavigationProps } from "../components/Navigation";
 import { Box } from "../components/Theme";
 
 const SIZE = 80;
 const PasswordChanged = ({
   navigation,
-}: StackNavigationProps<AuthenticationRoutes, "PasswordChanged">) => {
+}: AuthNavigationProps<"PasswordChanged">) => {
   return (
     <Container
       pattern={0}
       footer={
         <Box flexDirection="row" justifyContent="center">
           <RoundedIconButton
+            iconRatio={0.5}
             backgroundColor="white"
             color="secondary"
             onPress={() => navigation.pop()}
@@ -40,6 +38,7 @@ const PasswordChanged = ({
       >
         <Box height={60} />
         <RoundedIcon
+          iconRatio={0.5}
           color="primary"
           name="check"
           size={SIZE}

@@ -3,10 +3,7 @@ import React from "react";
 import { Linking } from "react-native";
 import * as Yup from "yup";
 import { Button, Container, Text } from "../components";
-import {
-  AuthenticationRoutes,
-  StackNavigationProps,
-} from "../components/Navigation";
+import { AuthNavigationProps } from "../components/Navigation";
 import { Box } from "../components/Theme";
 import Footer from "./components/Footer";
 import Checkbox from "./components/Form/Checkbox";
@@ -17,7 +14,7 @@ const validationSchema = Yup.object().shape({
 
 const ForgotPassword = ({
   navigation,
-}: StackNavigationProps<AuthenticationRoutes, "ForgotPassword">) => {
+}: AuthNavigationProps<"ForgotPassword">) => {
   const {
     handleChange,
     handleBlur,
@@ -30,6 +27,7 @@ const ForgotPassword = ({
     validationSchema,
     initialValues: { email: "", remember: false },
     onSubmit: (values) => {
+      console.log(values);
       navigation.navigate("PasswordChanged");
     },
   });
