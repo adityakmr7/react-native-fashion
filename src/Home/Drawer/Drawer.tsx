@@ -1,3 +1,4 @@
+import { DrawerActions } from "@react-navigation/native";
 import React from "react";
 import { Dimensions, Image } from "react-native";
 import { Header } from "../../components";
@@ -48,7 +49,7 @@ const items: DrawerItemProps[] = [
   },
 ];
 
-const Drawer = () => {
+const Drawer = ({ navigation }) => {
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor="white">
@@ -66,8 +67,12 @@ const Drawer = () => {
         >
           <Header
             title="Menu"
-            left={{ icon: "x", onPress: () => true }}
+            left={{
+              icon: "x",
+              onPress: () => navigation.dispatch(DrawerActions.closeDrawer()),
+            }}
             right={{ icon: "shopping-bag", onPress: () => true }}
+            dark
           />
         </Box>
       </Box>

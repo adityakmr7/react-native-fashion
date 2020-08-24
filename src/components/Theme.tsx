@@ -15,6 +15,7 @@ export const theme = {
     button: "#0C0D34",
     white: "white",
     grey: "rgba(12,13,52,0.05)",
+    lightGrey: "#FAFAFA",
     darkGrey: "#8A8D90",
     danger: "#FF0058",
     primaryLight: "#E7F9F7",
@@ -22,6 +23,7 @@ export const theme = {
     yellow: "#FFC641",
     pink: "#FF87A2",
     violet: "#442CB9",
+    lightBlue: "#BFEAF5",
   },
   spacing: {
     s: 8,
