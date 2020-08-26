@@ -6,6 +6,7 @@ import { HomeNavigationProps } from "../../components/Navigation";
 import { Box } from "../../components/Theme";
 import Background from "./Background";
 import Card from "./Card";
+import Categories from "./Categories";
 interface OutfitIdeasProps {}
 const cards = [
   {
@@ -45,8 +46,10 @@ const OutfitIdeas = ({ navigation }: HomeNavigationProps<"OutfitIdeas">) => {
           onPress: () => true,
         }}
       />
+      <Categories />
       <Box flex={1}>
         <Background />
+
         {cards.map(
           ({ index, source }) =>
             currentIndex < index * step + step && (
