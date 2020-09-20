@@ -1,7 +1,9 @@
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { DrawerActions } from "@react-navigation/native";
 import React from "react";
 import { Dimensions, Image } from "react-native";
 import { Header } from "../../components";
+import { HomeRoutes } from "../../components/Navigation";
 import { Box, Text, theme } from "../../components/Theme";
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
 
@@ -26,30 +28,32 @@ const items: DrawerItemProps[] = [
   {
     icon: "user",
     label: "Edit Profile",
-    screen: "EditProfile",
+    screen: "FavoritesOutfits",
     color: "yellow",
   },
   {
     icon: "clock",
     label: "Transaction History",
-    screen: "TransactionHistory",
+    screen: "FavoritesOutfits",
     color: "pink",
   },
   {
     icon: "user",
     label: "Notification History",
-    screen: "NotificationHistory",
+    screen: "FavoritesOutfits",
     color: "violet",
   },
   {
     icon: "log-out",
     label: "Logout",
-    screen: "Logout",
+    screen: "FavoritesOutfits",
     color: "secondary",
   },
 ];
-
-const Drawer = ({ navigation }) => {
+interface DrawerProps {
+  navigation: DrawerNavigationProp<HomeRoutes, "OutfitIdeas">;
+}
+const Drawer = ({ navigation }: DrawerProps) => {
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor="white">
@@ -108,8 +112,8 @@ const Drawer = ({ navigation }) => {
             </Text>
           </Box>
 
-          {items.map((item, _) => {
-            return <DrawerItem key={item.screen} {...item} />;
+          {items.map((item, i) => {
+            return <DrawerItem key={i} {...item} />;
           })}
         </Box>
       </Box>

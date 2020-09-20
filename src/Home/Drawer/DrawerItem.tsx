@@ -1,20 +1,26 @@
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shopify/restyle";
 import React from "react";
 import { RectButton } from "react-native-gesture-handler";
 import { RoundedIcon } from "../../components";
+import { HomeRoutes } from "../../components/Navigation";
 import { Box, Text, Theme } from "../../components/Theme";
 
 export interface DrawerItemProps {
   icon: string;
   color: keyof Theme["colors"];
-  screen: string;
+  screen: keyof HomeRoutes;
   label: string;
 }
 
 const DrawerItem = ({ icon, color, screen, label }: DrawerItemProps) => {
   const theme = useTheme();
+  const navigation = useNavigation();
   return (
-    <RectButton style={{ borderRadius: theme.borderRadii.m }}>
+    <RectButton
+      onPress={() => navigation.navigate(screen)}
+      style={{ borderRadius: theme.borderRadii.m }}
+    >
       <Box borderRadius="m" padding="m" flexDirection="row" alignItems="center">
         <RoundedIcon
           iconRatio={0.5}

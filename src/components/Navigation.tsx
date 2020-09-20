@@ -25,6 +25,7 @@ export type AppRoutes = {
 };
 export type HomeRoutes = {
   OutfitIdeas: undefined;
+  FavoritesOutfits: undefined;
 };
 export type AuthenticationRoutes = {
   OnBoarding: undefined;

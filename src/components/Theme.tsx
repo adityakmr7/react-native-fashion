@@ -5,6 +5,7 @@ import {
 } from "@shopify/restyle";
 import { TextStyle, ViewStyle } from "react-native";
 import { Image } from "react-native-svg";
+
 type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | Image };
 
 export const theme = {

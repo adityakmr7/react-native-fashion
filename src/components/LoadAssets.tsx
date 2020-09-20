@@ -36,6 +36,7 @@ interface LoadAssetsProps {
 const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
   const [isNavigationReady, setIsNavigationReady] = useState(!__DEV__);
   const [initialState, setInitialState] = useState<InitialState | undefined>();
+
   const ready = useLoadAssets(assets || [], fonts || {});
   useEffect(() => {
     const restoreState = async () => {
@@ -56,11 +57,13 @@ const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
       restoreState();
     }
   }, [isNavigationReady]);
+
   const onStateChange = useCallback(
     (state) =>
       AsyncStorage.setItem(NAVIGATION_STATE_KEY, JSON.stringify(state)),
     []
   );
+
   if (!ready || !isNavigationReady) {
     return <AppLoading />;
   }
