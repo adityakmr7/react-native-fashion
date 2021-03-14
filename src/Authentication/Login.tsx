@@ -57,7 +57,7 @@ const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
         </Text>
 
         <Box>
-          <Box marginBottom="m">
+          <Box marginBottom="l">
             <TextInput
               icon="mail"
               placeholder="Enter Your Email"

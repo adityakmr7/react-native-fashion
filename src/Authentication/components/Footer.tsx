@@ -11,7 +11,7 @@ interface FooterProps {
 
 const Footer = ({ onPress, title, action }: FooterProps) => {
   return (
-    <>
+    <Box marginTop="xl" >
       <SocialLogin />
       <Box alignItems="center">
         <BorderlessButton {...{ onPress }}>
@@ -23,7 +23,7 @@ const Footer = ({ onPress, title, action }: FooterProps) => {
           </Text>
         </BorderlessButton>
       </Box>
-    </>
+    </Box>
   );
 };
 

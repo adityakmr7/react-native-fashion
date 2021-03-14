@@ -30,7 +30,7 @@ const Container = ({ children, footer, pattern }: ContainerProps) => {
           <Box
             borderBottomLeftRadius="xl"
             overflow="hidden"
-            height={height * 0.61}
+            height={height * 0.9}
           >
             <Image
               source={asset}
@@ -63,7 +63,7 @@ const Container = ({ children, footer, pattern }: ContainerProps) => {
             <KeyboardAwareScrollView>{children}</KeyboardAwareScrollView>
           </Box>
         </Box>
-        <Box paddingTop="xl" backgroundColor="secondary">
+        <Box style={{marginTop: 10}} paddingTop="xl" backgroundColor="secondary">
           {footer}
           <Box height={insets.bottom}></Box>
         </Box>
